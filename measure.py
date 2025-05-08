@@ -1,15 +1,9 @@
+import argparse
 import math
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import os
-
-# ---- CONFIG ----
-IMAGE_PATH = 'Test.JPG'
-
-# Constants (Must match image size)
-WIDTH = 6080
-HEIGHT = 3040
 
 # Store clicks
 points = []
@@ -98,17 +92,26 @@ def calculate_angular_distance(p1, p2):
 
     return angular_distance
 
-# --- Load image ---
-if not os.path.exists(IMAGE_PATH):
-    raise FileNotFoundError(f"\n❌ ERROR: Cannot find image file '{IMAGE_PATH}' in the current folder.\n")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(add_help=True)
+    parser.add_argument('-i', '--image', type=str, default='Test.jpg')
+    args = parser.parse_args()
 
-# Use matplotlib to load (more reliable)
-img = mpimg.imread(IMAGE_PATH)
+    global IMAGE_PATH, WIDTH, HEIGHT
 
-# --- Plot ---
-fig, ax = plt.subplots(figsize=(12, 6))
-ax.imshow(img)
-ax.set_title('Click 2 points to measure the angular distance between them.')
-cid = fig.canvas.mpl_connect('button_press_event', onclick)
-kid = fig.canvas.mpl_connect('key_press_event', onkey)
-plt.show()
+    # --- Load image ---
+    IMAGE_PATH = args.image
+    if not os.path.exists(IMAGE_PATH):
+        raise FileNotFoundError(f"ERROR: File not found: '{IMAGE_PATH}' ")
+
+    img = mpimg.imread(IMAGE_PATH)
+
+    HEIGHT, WIDTH = img.shape[:2]
+
+    # --- Plot ---
+    fig, ax = plt.subplots(figsize=(12, 6))
+    ax.imshow(img)
+    ax.set_title('Click 2 points to measure the angular distance between them.')
+    cid = fig.canvas.mpl_connect('button_press_event', onclick)
+    kid = fig.canvas.mpl_connect('key_press_event', onkey)
+    plt.show()
