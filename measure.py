@@ -53,7 +53,7 @@ def onclick(event):
             mid_x = (x1 + x2) / 2
             mid_y = (y1 + y2) / 2
             text = ax.text(mid_x, mid_y, f"{ang_distance:.2f}°", color='cyan',
-                           fontsize=14, weight='bold', bbox=dict(facecolor='black', alpha=0.5))
+                           fontsize=FONT, weight='bold', bbox=dict(facecolor='black', alpha=0.5))
             text_artists.append(text)
 
             fig.canvas.draw()
@@ -95,9 +95,10 @@ def calculate_angular_distance(p1, p2):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(add_help=True)
     parser.add_argument('-i', '--image', type=str, default='Test.jpg')
+    parser.add_argument('-f', '--font_size', type=int, default='14', required=False)
     args = parser.parse_args()
 
-    global IMAGE_PATH, WIDTH, HEIGHT
+    global IMAGE_PATH, WIDTH, HEIGHT, FONT
 
     # --- Load image ---
     IMAGE_PATH = args.image
@@ -107,6 +108,7 @@ if __name__ == "__main__":
     img = mpimg.imread(IMAGE_PATH)
 
     HEIGHT, WIDTH = img.shape[:2]
+    FONT = args.font_size
 
     # --- Plot ---
     fig, ax = plt.subplots(figsize=(12, 6))
