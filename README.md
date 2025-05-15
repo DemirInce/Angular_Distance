@@ -7,6 +7,7 @@ Usage: measure.py [-h] [-i IMAGE]
 options:  
 	-h, --help               -> show help menu  
 	-i IMAGE, --image IMAGE  -> path to image, defaults to 'Test.jpg'  
+ 	-f SIZE, --font_size SIZE -> adjusts font size, defaults to 14
 
 Click on two points to measure the distance. 
 
