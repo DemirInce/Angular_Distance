@@ -1,13 +1,13 @@
 # Angular_Distance
 
-Measures the angular distance between any two points on a 360-degree by 180-degree image from a 360 camera. By default, the dimensions are 6080 by 3040 (the resolution of the camera I own).  
+Measures the angular distance between any two points on a 360-degree by 180-degree image from a 360 camera. An image with a 2:1 aspect ratio is required.
 
-Usage: measure.py [-h] [-i IMAGE]  
+Usage: measure.py [-h] [-i IMAGE] [-f FONT SIZE]
 
 options:  
 	-h, --help               -> show help menu  
 	-i IMAGE, --image IMAGE  -> path to image, defaults to 'Test.jpg'  
- 	-f SIZE, --font_size SIZE -> adjusts font size, defaults to 14
+ 	-f FONT SIZE, --font_size FONT SIZE -> adjusts font size, defaults to 14
 
 Click on two points to measure the distance. 
 
